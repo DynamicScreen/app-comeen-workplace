@@ -1,0 +1,277 @@
+.comeen-main-setup-container {
+    display: flex;
+    flex: 1;
+    background: #171f34;
+    height: 100%;
+}
+
+.setup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    background: #0b101d;
+    transition: all 1s ease;
+}
+
+.setup-portrait-width-building {
+    width: 60%;
+}
+
+.setup-portrait-width-no-building {
+    width: 100%;
+}
+
+.setup-height-building,
+.setup-height-no-building {
+    height: 100%;
+}
+
+.setup-container > p {
+    margin: 20px 0;
+    font-size: 3.5vw;
+    font-weight: 600;
+    text-align: center;
+}
+
+.buildings {
+    overflow: auto;
+    padding-bottom: 100px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.buildings::-webkit-scrollbar {
+    display: none;
+}
+
+.building,
+.unknown-building {
+    text-overflow: ellipsis;
+    margin-bottom: 20px;
+    padding: 30px;
+    background: #171f34;
+    border-radius: 5px;
+}
+
+.unknown-building {
+    text-overflow: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.unknown-building p {
+    margin: 0;
+}
+
+.empty-building,
+.empty-meeting-room {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.empty-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border-radius: 5px;
+    background: #171f34;
+}
+
+.empty-icon > i {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.empty-building > .message,
+.empty-meeting-room > .message {
+    margin-left: 20px;
+    font-size: 1.2rem;
+}
+
+.checked {
+    box-shadow: inset 0px 0px 0px 6px #25e874;
+}
+
+.building > p {
+    margin: 0;
+}
+
+.meeting-rooms-container {
+    display: flex;
+    flex-direction: column;
+    width: 0;
+    opacity: 0;
+}
+
+.meeting-rooms-container > p {
+    margin: 0 0 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.meeting-rooms-container .valid-setup-button:last-of-type {
+    margin-top: auto;
+}
+
+.meeting-rooms {
+    margin-bottom: 10px;
+    padding-bottom: 30px;
+    background: #171f34;
+    z-index: 1;
+    overflow: auto;
+    scrollbar-width: auto;
+    scrollbar-color: #0b0f1e rgba(255, 255, 255, 0);
+}
+
+.appear-anim {
+    animation: appearAnimation 0.5s 1.5s forwards;
+}
+
+@keyframes appearAnimation {
+    0% {
+        padding: 40px;
+        width: 40vw;
+    }
+
+    100% {
+        padding: 40px;
+        width: 40vw;
+        opacity: 1;
+    }
+}
+
+.meeting-rooms::-webkit-scrollbar {
+    display: none;
+}
+
+.meeting-room {
+    background: #0b101d;
+    border-radius: 5px;
+    display: flex;
+    padding: 40px;
+    margin-bottom: 20px;
+}
+
+.meeting-room > p {
+    margin: 0;
+}
+
+.meeting-room,
+.building {
+    transition: all 0.3s ease;
+}
+
+.search-input {
+    border: none;
+    padding: 20px;
+    background: #0b101d;
+    color: #ffffff;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.comeen-secondary {
+    font-size: 0.8rem;
+}
+
+.valid-setup-button {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px;
+    border-radius: 5px;
+    background: #25e874;
+    color: #0b101d;
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: bold;
+}
+
+.loading {
+    background: #f1c40f;
+}
+
+.valid-setup-button > p {
+    margin: 0 30px 0 15px;
+}
+
+.valid {
+    display: inline-block;
+    margin-right: 14px;
+    transform: rotate(45deg);
+    border-radius: 3px;
+    height: 24px;
+    width: 12px;
+    border-bottom: 7px solid #0b101d;
+    border-right: 7px solid #0b101d;
+}
+
+@media (orientation: portrait) {
+    .comeen-main-setup-container {
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .setup-container {
+        width: 100%;
+    }
+
+    .meeting-rooms {
+        height: 100%;
+    }
+
+    .meeting-rooms-container {
+        height: 0;
+    }
+
+    .setup-portrait-width-building {
+        width: 100%;
+    }
+
+    .setup-portrait-width-no-building {
+        width: 100%;
+    }
+
+    @keyframes appearAnimation {
+        0% {
+            padding: 40px;
+            height: 0;
+            width: 100%;
+        }
+
+        50% {
+            opacity: 0;
+        }
+
+        100% {
+            padding: 40px;
+            width: 100%;
+            height: 100%;
+            opacity: 1;
+        }
+    }
+
+    .meeting-rooms-height-building {
+        flex: 1;
+    }
+
+    .meeting-rooms-height-no-building {
+        height: 0;
+    }
+
+    .setup-height-building {
+        height: 45%;
+    }
+
+    .setup-height-no-building {
+        height: 100%;
+    }
+}

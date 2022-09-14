@@ -1,0 +1,45 @@
+<div class="container comeen-room-base">
+    <div class="comeen-room-base slide-content">
+      <div class="comeen-room-base meeting-room">
+        <div class="comeen-room-base header" :class="headerStatus + '-header'">
+          <div v-if="hasMetadata" class="location">
+            <p class="comeen-room-base comeen-secondary">{{ slide.data.meeting_room_building_name }} <span
+                v-show="slide.data.meeting_room_building_name">-</span> {{ i18n('floor') }} {{ slide.data.floor }}</p>
+            <p class="comeen-room-base comeen-primary">{{ slide.data.meeting_room_name }}</p>
+          </div>
+          <div class="logo" v-else>
+            <img src="/assets/dynamicscreen.comeen/comeen-black.svg"/>
+          </div>
+          <div v-if="hasMetadata && !hasError && slide.data.slide_options['manual_reload']" class="comeen-room-base reload">
+            <i class="fad fa-sync-alt" :class="{'spin': requesting}" @click="reload()"></i>
+          </div>
+          <div class="time">
+            <div>
+              <p class="comeen-room-base comeen-secondary text-end">{{ getTimeFormatted('ll') }}</p>
+              <p class="comeen-room-base comeen-primary text-end p-0"><i class="comeen-room-base  comeen-fa-small far fa-clock"></i>{{
+                  clockFormat === '24h' ? getTimeFormatted('HH:mm') : getTimeFormatted('hh:mm')
+                }} <small class="small-text" v-if="clockFormat === '12h'">{{ getTimeFormatted('a') }}</small>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="comeen-room-base component-container">
+          <PopUp :display="isPopupDisplayed"
+                 @hidePopup="hidePopup" @cancelPopup="cancelPopup"
+                 :status="popupStatus" :title="popupTitle" :message="popupMessage"
+                 :data="popupData" :duration="popupDuration"/>
+          <component
+              :is="`meeting-room-${pageType}`"
+              :slide="slide"
+              :hasMetadata="hasMetadata"
+              :inMeeting="inMeeting"
+              :currentAppointment="currentAppointment"
+              @displayPopup="displayPopup"
+              @hidePopup="hidePopup"
+              @nextEventIncoming="nextEventIncoming"
+              :vue="vue"
+          />
+        </div>
+      </div>
+    </div>
+  </div>

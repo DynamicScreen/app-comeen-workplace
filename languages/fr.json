@@ -1,0 +1,14 @@
+{
+    "app": {
+        "name": "Comeen Workplace",
+        "description": "App description"
+    },
+    "modules": {
+        "room-booking": {
+            "name": "Salle de réunion",
+            "description": "Module description",
+            "options": {
+            }
+        }
+    }
+}

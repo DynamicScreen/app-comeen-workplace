@@ -1,0 +1,48 @@
+# YAML
+id: app-comeen-workplace
+name: app.name
+description: app.description
+logo: fak fa-comeen
+version: 0.2.0
+channel: stable
+api-level: 1
+color: blue
+category: workplace
+author:
+    name: Comeen
+    email: support@comeen.com
+privileges:
+    needs_account:
+        -   identifier: comeen-workplace-account
+            type: comeen-workplace
+            why: privileges.needs_account.google.why
+modules:
+    -   name: modules.comeen-workplace-account.name
+        logo: fak fa-comeen
+        description: modules.comeen-workplace-account.description
+        identifier: comeen-workplace
+        color: blue
+        type: auth-provider
+        options:
+            provider: comeen-workplace
+            vue:
+                options: src/Account/AccountOptions.ts
+            php:
+                handler: \ComeenPlay\ComeenWorkplace\Account\ComeenWorkplaceAuthProviderHandler
+            node:
+                handler: src/handler.js
+    - name: modules.room-booking.name
+      logo: fak fa-comeen
+      identifier: room-booking
+      color: red
+      type: slide
+      description: modules.room-booking.description
+      options:
+          privileges:
+            needs_account:
+              - comeen-workplace-account
+          vue:
+              component: src/RoomBooking/RoomBooking.ts
+              options: src/RoomBooking/RoomBookingOptions.ts
+          php:
+              handler: \ComeenPlay\ComeenWorkplace\RoomBooking\RoomBookingHandler

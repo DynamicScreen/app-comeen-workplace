@@ -1,0 +1,27 @@
+{
+    "app": {
+        "name": "Comeen Workplace",
+        "description": "App description"
+    },
+    "modules": {
+        "room-booking": {
+            "name": "Room booking",
+            "description": "Module description",
+            "options": {
+                "display_options": "Display options",
+                "action_options": "Action options",
+                "webhook_url": "Webhook",
+
+                "account": "Account",
+                "hide_meeting_name": "Hide meeting name",
+                "hide_organizer": "Hide organizer name",
+                "hide_company_logos": "Hide company logos",
+                "authentication_book_required_action": "Authentication required for booking",
+                "authentication_check_in_out_required_action": "Authentication required for check-in or check-out a meeting",
+                "disable_on_the_fly_booking": "Disable on-the-fly booking",
+                "disable_cancel_meeting_from_screen": "Disable meeting cancellation from screen",
+                "manual_reload": "Display the manual information update button"
+            }
+        }
+    }
+}

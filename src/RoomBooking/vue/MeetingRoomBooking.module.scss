@@ -1,0 +1,95 @@
+.slide-leave-active,
+.slide-enter-active {
+  transition: all .5s ease-in-out;
+}
+.slide-leave, .slide-enter-to {
+  opacity: 1;
+}
+.slide-leave-to, .slide-enter {
+  opacity: 0;
+}
+
+
+.comeen-main-booking-container {
+  display: flex;
+  flex-flow: row;
+  flex: 1;
+}
+
+.book-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  min-width: 60%;
+}
+
+.appointments-container {
+  position: relative;
+  width: 35%;
+  min-width: 35%;
+  background: #171f34;
+  scrollbar-width: auto;
+  scrollbar-color: #0b0f1e rgba(255, 255, 255, 0);
+}
+
+/* Chrome, Edge, and Safari */
+.appointments-container::-webkit-scrollbar {
+  width: 10px;
+  background: rgba(255, 255, 255, 0);
+}
+
+.appointments-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0);
+}
+
+.appointments-container::-webkit-scrollbar-thumb {
+  background-color: #0b0f1e;
+  border-radius: 10px;
+  border: 3px solid rgba(255, 255, 255, 0);
+}
+
+.book-portrait-meeting-height {
+  height: 100%;
+}
+
+.book-portrait-free-height {
+  height: 100%;
+}
+
+@media (orientation: portrait) {
+  .comeen-main-booking-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .book-container {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    flex-grow: 0;
+    transition: height 1s ease;
+  }
+
+  .book-portrait-meeting-height {
+    height: 50%;
+  }
+
+  .book-portrait-free-height {
+    height: 40%
+  }
+
+  .on-fly-booking-form {
+    height: 50%;
+  }
+
+  .appointments-container {
+    width: 100%;
+    flex: 1;
+    padding: 30px;
+  }
+
+}
