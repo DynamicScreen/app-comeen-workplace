@@ -25,6 +25,58 @@ class RoomBookingHandler extends SlideHandler
 
             return $parameters;
         });
+
+        $this->addRemoteMethod('webhook-update-display', function ($parameters, $details) {
+            /** @var DisplayModule $display */
+            $display = Arr::get($details, 'display');
+            /** @var SlideModule $slide */
+            $slide = Arr::get($details, 'slide');
+
+            $display->refreshData($slide->getId());
+
+            return $parameters;
+        });
+
+        $this->addRemoteMethod('check-in', function ($parameters, $details) {
+            /** @var SlideModule $slide */
+            $slide = Arr::get($details, 'slide');
+
+            $driver = $this->getAuthProvider($slide->getAccounts());
+            if ($driver == null) return;
+
+            $driver->checkIn(Arr::get($parameters, 'booking_id'));
+
+            return $parameters;
+        });
+
+        $this->addRemoteMethod('check-out', function ($parameters, $details) {
+            /** @var SlideModule $slide */
+            $slide = Arr::get($details, 'slide');
+
+            $driver = $this->getAuthProvider($slide->getAccounts());
+            if ($driver == null) return;
+
+            $driver->releaseMeetingRoom(Arr::get($parameters, 'booking_id'));
+
+            return $parameters;
+        });
+
+        $this->addRemoteMethod('book-room', function ($parameters, $details) {
+            /** @var SlideModule $slide */
+            $slide = Arr::get($details, 'slide');
+
+            $driver = $this->getAuthProvider($slide->getAccounts());
+            if ($driver == null) return;
+
+            $driver->bookMeetingRoom(
+                Arr::get($parameters, 'meeting_room_id'),
+                Arr::get($parameters, 'title'),
+                Arr::get($parameters, 'description'),
+                Arr::get($parameters, 'date_start'),
+                Arr::get($parameters, 'date_end'));
+
+            return $parameters;
+        });
     }
 
     public function fetch(ISlide $slide, IDisplay $display): void
@@ -90,10 +142,10 @@ class RoomBookingHandler extends SlideHandler
             $expiration = Carbon::now()->addMinute(30);
             $cache_key = "dynamicscreen.comeen::meeting-room::{$meeting_room_id}";
 
-            $data = app('cache')->remember($cache_key, $expiration, function () use ($driver, $display, $meeting_room_id, $slide) {
+            // $data = app('cache')->remember($cache_key, $expiration, function () use ($driver, $display, $meeting_room_id, $slide) {
                 $actionMeetingRoom = new GetMeetingRoomData($meeting_room_id, $driver);
-                return $actionMeetingRoom->call();
-            });
+                $data = $actionMeetingRoom->call();
+            // });
 
             // Removing __accounts field from slide options to get only the display/action options, and convert them into value boolean
             $slide_options = collect($slide->getOptions())->forget("__accounts")->map(function ($item) {

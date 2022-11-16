@@ -13,13 +13,6 @@ export default class RoomBookingOptionsModule extends SlideOptionsModule {
   };
 
   setup(props: Record<string, any>, vue: VueInstance, context: ISlideOptionsContext) {
-const en = require("/home/scleriot/Dev/dynamicscreen/app-server/storage/apps//app-comeen-workplace/0.2.0/languages/en.json");
-const fr = require("/home/scleriot/Dev/dynamicscreen/app-server/storage/apps//app-comeen-workplace/0.2.0/languages/fr.json");
-const translator: any = this.context.translator;
-translator.addResourceBundle('en', 'room-booking', en);
-translator.addResourceBundle('fr', 'room-booking', fr);
-this.t = (key: string, namespace: string = 'room-booking') => translator.t(key, {ns: namespace});
-
     const { h } = vue;
 
     const update = context.update;

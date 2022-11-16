@@ -1,0 +1,194 @@
+:global {
+    .cls-2 {
+        fill: #171f34;
+        opacity: .501
+    }
+
+    .cls-3 {
+        fill: #516cb4
+    }
+
+    .cls-4 {
+        fill: #38c3ed
+    }
+
+    .cls-5 {
+        fill: #27ffcd
+    }
+
+    .cls-6 {
+        fill: #25e8b4
+    }
+
+    .cls-7 {
+        fill: #25e874
+    }
+}
+
+  .book-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    padding: 30px;
+    height: 100%;
+    width: 100%;
+  }
+
+  .incoming-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .incoming-text > p {
+    margin: 20px 0 0;
+    font-size: 3.5vw;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .book-button > p {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .book-button-wrapper {
+    position: relative;
+    height: inherit;
+    width: 100%;
+  }
+
+  .dots {
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    padding: 30px;
+    width: 35vw;
+  }
+
+  .book-button .dots:nth-child(odd) {
+    transform: rotate(82deg);
+  }
+
+  .book {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15vw;
+    height: 15vw;
+    border-radius: 50%;
+    border: 1.5vw solid #161d31;
+    background: #25e874;
+  }
+
+  .book {
+    color: #171f34;
+    text-align: center;
+    font-size: 1.8vw;
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: bold;
+  }
+
+
+  .pulse {
+    animation-duration: 2s;
+    animation-name: pulse;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
+  @keyframes pulse {
+    0% {
+      opacity: 0;
+      transform: scale(0.7);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.1);
+    }
+  }
+
+  .check-in-button {
+    display: flex;
+    align-items: center;
+    width: 65%;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: bold;
+    margin-top: 30px;
+  }
+
+  .check-in-button {
+    border: 3px solid #26e689;
+    color: #26e689;
+  }
+
+  .check-in-button > p {
+    margin: 0 30px 0 15px;
+  }
+
+  .valid-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin-left: auto;
+    width: 50px;
+    height: 50px;
+  }
+
+  .valid-container {
+    background: rgba(38, 230, 137, 0.3);
+  }
+
+  .valid {
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    display: inline-block;
+    margin-right: 14px;
+    transform: rotate(45deg);
+    border-radius: 3px;
+    height: 24px;
+    width: 12px;
+    border-bottom: 7px solid #25e874;
+    border-right: 7px solid #25e874;
+  }
+
+  @media (orientation: portrait) {
+    .book-button {
+      flex-direction: row;
+      width: 100%;
+    }
+
+    .book-button p {
+      width: 100%;
+    }
+  }
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+}

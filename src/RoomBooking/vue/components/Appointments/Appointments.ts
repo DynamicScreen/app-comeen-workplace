@@ -1,5 +1,6 @@
-import { defineComponent, h, TransitionGroup, withDirectives, PropType, ref, computed } from 'vue'
+import { defineComponent, h, TransitionGroup, withDirectives, PropType } from 'vue'
 import useUtils from '../../useUtils'
+import { VueInstance } from "@comeen/comeen-play-sdk-js";
 
 import s from './Appointments.module.scss'
 
@@ -11,25 +12,20 @@ export default {
     clockFormat: { type: String, required: true }
   },
   setup(props) {
-    const { getHoursMinutes } = useUtils({ ref: ref, computed: computed });
+    const { ref, computed } = window.comeen_rooms.vue as VueInstance
+    const t = window.comeen_rooms.t
 
-    console.log(props.appointments.length);
+    const { getHoursMinutes } = useUtils({ ref: ref, computed: computed });
 
     return () => h('div', { class: s['appointments-container'] }, [
       h('div', { class: s['appointments'] }, [
         // h(TransitionGroup, { name: 'fade' }, [
-          h('div', { class: [s['appointment'], s['empty-appointment']] }, [
-            h('div', { class: s['empty-icon'] }, [
-              h('i', { class: 'fad fa-empty-set' })
-            ]),
-            h('p', null, 'no-meeting')
-          ]),
           !props.appointments.length ?
             h('div', { class: [s['appointment'], s['empty-appointment']] }, [
               h('div', { class: s['empty-icon'] }, [
                 h('i', { class: 'fad fa-empty-set' })
               ]),
-              h('p', null, 'no-meeting')
+              h('p', null, t('no-meeting'))
             ])
             : props.appointments.map(appointment => h('div', { class: [s['appointment']], key: appointment.id }, [
               h('div', { class: s['schedule-wrapper'] }, [
@@ -41,7 +37,7 @@ export default {
 
               !props.options['hide_meeting_name'] ?
                 h('div', { class: s['event'] }, appointment.topic)
-                : h('div', { class: s['event'] }, "booked"),
+                : h('div', { class: s['event'] }, t("booked")),
 
               !props.options['hide_organizer'] && h('div', { class: [s['organizer'], s['comeen-secondary']] }, `organized-by ${appointment.organizer}`)
             ]))

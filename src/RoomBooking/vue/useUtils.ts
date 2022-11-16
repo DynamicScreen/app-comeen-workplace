@@ -1,7 +1,8 @@
 import moment from "moment";
 
 export default function ({ ref, computed }) {
-  const time = ref(moment());
+  const time = window.comeen_rooms.time || ref(moment());
+  if (!window.comeen_rooms.time) window.comeen_rooms.time = time
   const currentTime = computed(() => time.value)
 
   function updateTimer() {
@@ -10,15 +11,9 @@ export default function ({ ref, computed }) {
   function getHoursMinutes(time, clockFormat) {
     return clockFormat ==='24h' ? moment(time).format("HH:mm") : moment(time).format("hh:mm a");
   }
-  function checkInMeeting() {
-    return null;
-  }
-  function updateLed() {
-    return null;
-  }
 
   return {
     time, currentTime,
-    updateTimer, getHoursMinutes, checkInMeeting, updateLed
+    updateTimer, getHoursMinutes
   }
 }

@@ -229,4 +229,59 @@ class ComeenWorkplaceAuthProviderHandler extends OAuthProviderHandler
         }
 
     }
+
+    public function checkIn($booking_id) {
+        $config = $this->default_config;
+
+        $client = $this->getClient();
+        $config = $this->refreshToken($config);
+
+        $response = $client->post("/api/v1/meeting_room_bookings/$booking_id/checkin.json", [
+            'headers' => [
+                'Authorization' => "{$config['token_type']} {$config['access_token']}"
+            ]
+        ]);
+
+        return $response;
+    }
+
+    public function releaseMeetingRoom($booking_id) {
+        $config = $this->default_config;
+
+        $client = $this->getClient();
+        $config = $this->refreshToken($config);
+
+        $response = $client->post("/api/v1/meeting_room_bookings/$booking_id/release.json", [
+            'headers' => [
+                'Authorization' => "{$config['token_type']} {$config['access_token']}"
+            ]
+        ]);
+
+        return $response;
+    }
+
+    public function bookMeetingRoom($meeting_room_id, $title, $description, $date_start, $date_end)
+    {
+        $config = $this->default_config;
+
+        $client = $this->getClient();
+        $config = $this->refreshToken($config);
+
+        $response = $client->post("/api/v1/meeting_rooms/$meeting_room_id/create_event.json", [
+            'headers' => [
+                'Authorization' => "{$config['token_type']} {$config['access_token']}"
+            ],
+            'json' => [
+                "title" => $title,
+                "description" => $description,
+                "date_start" => $date_start,
+                "date_end" => $date_end,
+                "extended_properties" => [
+                    "from_comeen" => true
+                ]
+            ]
+        ]);
+
+        return json_decode($response->getBody()->getContents());
+    }
 }

@@ -6,13 +6,14 @@ import style from './MeetingRoomSetup.module.scss'
 import useUtils from './useUtils'
 import { IPublicSlide, VueInstance } from "@comeen/comeen-play-sdk-js";
 
-export default defineComponent({
+export default {
   props: {
     slide : { type: Object as PropType<IPublicSlide>, required: true },
     vue: { type: Object as PropType<VueInstance>, required: true }
   },
   setup(props) {
-    const { ref, computed } = props.vue
+    const { ref, computed } = window.comeen_rooms.vue
+    const t = window.comeen_rooms.t
 
     const search = ref('')
     const requesting = ref(false)
@@ -75,13 +76,13 @@ export default defineComponent({
 
     return () => h('div', { class: style['comeen-main-setup-container'] }, [
       h('div', { class: [ style['setup-container'], buildingId.value ? [style['setup-portrait-width-building'], style['setup-height-building'] ] : [style['setup-portrait-width-no-building'], style['setup-height-no-building'] ] ] }, [
-        buildings.value.length && h('p', null, 'select-building'),
+        buildings.value.length && h('p', t('select-building')),
         h('div', { class: 'buildings' }, [
           !buildings.value.length && h('div', { class: [ style['building'], style['empty-building'] ] }, [
             h('div', { class: style['empty-icon'] }, [
               h('i', { class: 'fad fa-empty-set' })
             ]),
-            h('p', { class: style['message'] }, [ 'no-building' ])
+            h('p', { class: style['message'] }, t('no-building'))
           ]),
           buildings.value.map(building => h('div', { onClick: () => buildingId.value = building.id, class: [ style['building'], { [style['checked']]: buildingId.value === building.id } ], key: building.id }, [
             h('p', null, [
@@ -93,31 +94,31 @@ export default defineComponent({
       ]),
 
       h('div', { class: [ style['meeting-rooms-container'], { [style['appear-anim']]: buildingId.value, [style['meeting-rooms-height-building']]: buildingId.value, [style['meeting-rooms-height-no-building']]: !buildingId.value} ] }, [
-        (!noMeetingRoomFound.value || buildingId.value === 'unknown') && h('p', null, 'select-meeting-room'),
-        ((meetingRooms.value.length >= 8) || (noBuildingRooms.value.length >= 8 && buildingId.value === 'unknown') && !noMeetingRoomFound.value || buildingId.value === 'unknown') && h('input', { class: style['search-input'], type: 'text', placeholder: 'search', modelValue: search.value, 'onUpdate:modelValue': (value) => search.value = value }),
+        (!noMeetingRoomFound.value || buildingId.value === 'unknown') && h('p', t('select-meeting-room')),
+        ((meetingRooms.value.length >= 8) || (noBuildingRooms.value.length >= 8 && buildingId.value === 'unknown') && !noMeetingRoomFound.value || buildingId.value === 'unknown') && h('input', { class: style['search-input'], type: 'text', placeholder: t('search'), modelValue: search.value, 'onUpdate:modelValue': (value) => search.value = value }),
 
         !meetingRooms.value.length && buildingId.value !== 'unknown' ? h('div', { class: style['meeting-room empty-meeting-room'] }, [
           h('div', { class: style['empty-icon'] }, [
             h('i', { class: 'fad fa-empty-set' })
           ]),
-          h('p', { class: style['message'] }, [ 'no-meeting-room' ])
+          h('p', { class: style['message'] }, t('no-meeting-room'))
         ]) : h('div', { class: style['meeting-rooms'] }, [
           meetingRooms.value.map(meetingRoom => h('div', { onClick: () => meetingRoomId.value = meetingRoom.id, class: [ style['meeting-room'], { [style['checked']]: meetingRoomId.value === meetingRoom.id } ], key: meetingRoom.id }, [
-            h('p', null, meetingRoom.name)
+            h('p', meetingRoom.name)
           ]))
         ]),
 
         hasNoBuildingRooms && buildingId.value === 'unknown' && h('div', { class: style['meeting-rooms'] }, [
           noBuildingRooms.value.map(meetingRoom => h('div', { onClick: () => meetingRoomId.value = meetingRoom.id, class: [ style['meeting-room'], { [style['checked']]: meetingRoomId.value === meetingRoom.id } ], key: meetingRoom.id }, [
-            h('p', null, meetingRoom.name)
+            h('p', meetingRoom.name)
           ]))
         ]),
 
         buildingId.value && meetingRoomId.value && h('div', { onClick: validMeetingRoomSelection, class: [ style['valid-setup-button'], { [style['loading']]: loading.value } ] }, [
-          h('p', null, [ loading.value ? 'loading' : 'valid' ]),
+          h('p', null, t(loading.value ? 'loading' : 'valid')),
           !requesting.value ? h('div', { class: style['valid'] }) : h(SpinnerLoader)
         ])
       ])
     ])
   }
-})
+}

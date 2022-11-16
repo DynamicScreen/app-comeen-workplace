@@ -6,11 +6,15 @@
   "author": "Comeen",
   "dependencies": {
     "@types/node": "^18.7.16",
+    "file-loader": "^6.2.0",
     "i18next": "^20.4.0",
+    "mitt": "^3.0.0",
     "moment": "^2.29.4",
+    "qr-code-styling": "^1.6.0-rc.1",
     "sass": "^1.54.9",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
+    "svg-inline-loader": "^0.8.2",
     "vue-snip": "^2.0.0",
     "webpack": "^5.50.0"
   },
