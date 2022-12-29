@@ -19,6 +19,8 @@ export default class RoomBookingOptionsModule extends SlideOptionsModule {
 
     const { Field, TextInput, Toggle } = this.context.components
 
+    context.updateAutoName("Comeen Workplace - Room Booking")
+
     return () =>
       h("div", {}, [
         h(Field, {}, this.t('modules.room-booking.options.display_options')),
